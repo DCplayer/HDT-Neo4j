@@ -66,7 +66,7 @@ public class Relaciones {
             grafo.addNode("" + lista.get(0).get(i));
         }
 
-        
+
 
     }
 
