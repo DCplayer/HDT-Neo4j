@@ -15,6 +15,7 @@ public class Relaciones {
     public ArrayList<ArrayList> lista = new ArrayList();
     public Edge[] edges = new Edge[64];
     public int contador = 0;
+    public Connect conexion = new Connect();
 
     /**
      * CrunchifyCSVtoArrayList: Metodo que convierte documentos csv a la matriz de datos
@@ -64,22 +65,34 @@ public class Relaciones {
     }
 
     public void seccionA(){
+        conexion.delete();
+
+
         Graph grafo = new SingleGraph("SeccionA");
         for (int i = 0; i <= 13; i++){
-            grafo.addNode("" + lista.get(0).get(i));
+            String dato = "" + lista.get(0).get(i);
+            conexion.insert(dato.replace(" ", ""), dato);
+            grafo.addNode(dato).addAttribute("ui.label", "" + lista.get(0).get(i));
+
         }
 
         for (int i = 1; i <= 13; i++){
             for (int j = 1; j <= 13; j++){
                 int numero = Integer.parseInt(""+lista.get(i).get(j));
                 if(numero > 0){
-                    edges[contador] = grafo.addEdge(""+lista.get(0).get(i-1)+lista.get(0).get(j-1),""+lista.get(0).get(i-1),"" +lista.get(0).get(j-1)  );
+                    String envia = ""+lista.get(0).get(j-1);
+                    String recibe = ""+lista.get(0).get(i-1);
+
+                    edges[contador] = grafo.addEdge(envia.replace(" ", "") + recibe.replace(" ",  ""),envia,recibe);
                     edges[contador].addAttribute("length", numero);
                     edges[contador].addAttribute("label",""+edges[contador].getNumber("length"));
+                    conexion.relate(envia, recibe , ""+numero );
+                    contador =+ 1;
                 }
 
             }
         }
+        grafo.display();
     }
 
     public ArrayList<ArrayList> getLista() {

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class Interfaz {
 
 	private JFrame frmVisualizadorDeGrafos;
-	
 	private JTextField txtNinguno;
+
 
 	/**
 	 * Launch the application.
