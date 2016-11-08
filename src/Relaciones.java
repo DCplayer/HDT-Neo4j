@@ -60,8 +60,12 @@ public class Relaciones {
         }
 
         return crunchifyResult;
+
     }
 
+    /**
+     * seccionA: Metodo que grafica los nodos del texto recibido y sus aristas
+     */
     public void seccionA(){
         conexion.delete();
 
@@ -87,7 +91,7 @@ public class Relaciones {
                     edges[contador] = grafo.addEdge(enviador + recibidor,enviador,recibidor);
                     edges[contador].addAttribute("length", numero);
                     edges[contador].addAttribute("label",""+edges[contador].getNumber("length"));
-                    conexion.relate(enviador,recibidor , ""+numero );
+                    conexion.relate(enviador,recibidor, ""+numero );
                     contador =+ 1;
                 }
 
@@ -96,6 +100,11 @@ public class Relaciones {
         grafo.display();
     }
 
+
+    /**
+     * Metodo que devuelve matriz de relaciones del .txt ingresado
+     * @return ArrayList con matriz de relaciones
+     */
     public ArrayList<ArrayList> getLista() {
         return lista;
     }
