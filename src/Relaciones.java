@@ -1,28 +1,54 @@
-import org.graphstream.graph.Graph;
-import org.graphstream.graph.implementations.SingleGraph;
-import org.graphstream.graph.Node;
-
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
 
 /**
- * Created by Christian12 on 06/11/2016.
+ * Created by DiegoC on 06/11/2016.
  */
 public class Relaciones {
 
-    public static void main(String args[]) {
+    public int[][] matrix;
+    public int contador = 0, contador2 = 1;
 
-        System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
-        Graph graph = new SingleGraph("Tutorial 1");
+    /**
+     * CrunchifyCSVtoArrayList: Metodo que convierte documentos csv a arraylists
+     */
 
-        Node a = graph.addNode("A");
-        Node b = graph.addNode("B");
+    public static ArrayList<String> crunchifyCSVtoArrayList(String crunchifyCSV) {
+        ArrayList<String> crunchifyResult = new ArrayList<String>();
 
-        a.setAttribute("xy", 0, 0);
-        a.setAttribute("xy", 1, 1);
+        try {
 
-        graph.addEdge("AB", "A", "B", true);
-        graph.addEdge("BA", "B", "A", true);
+            BufferedReader crunchifyBuffer = null;
+            String crunchifyLine;
+            FileReader fr = new FileReader("C:\\Users\\Christian12\\Desktop\\Cuarto Semestre\\Algoritmos y Estructura de Datos\\HDT-Neo4j\\src\\datos.txt");
+            crunchifyBuffer = new BufferedReader(fr);
 
-        graph.display(true);
-        //graph.display();
+
+            if (crunchifyCSV != null) {
+                String[] splitData = crunchifyCSV.split("\\s*;\\s*");
+                for (int i = 0; i < splitData.length; i++) {
+                    if (!(splitData[i] == null) || !(splitData[i].length() == 0)) {
+                        crunchifyResult.add(splitData[i].trim());
+                    }
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+
+        }return crunchifyResult;
     }
+
+    /**
+     * Matrix: crea la matriz de las relaciones entre las personas
+     */
+
+    void Matrix(){
+
+    }
+
+
+
+
 }
