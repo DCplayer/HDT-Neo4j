@@ -29,7 +29,9 @@ public class Principal {
             for(int i = 0; i < 14; i++){
                 graph.addNode(names[i]);
             }
-            graph.display();
+
+
+            graph.display(true);
 
             con.close();
 
