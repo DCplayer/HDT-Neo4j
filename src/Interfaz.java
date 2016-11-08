@@ -1,7 +1,3 @@
-import org.graphstream.graph.Graph;
-import org.graphstream.graph.Node;
-import org.graphstream.graph.implementations.SingleGraph;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Interfaz {
 
@@ -31,16 +28,13 @@ public class Interfaz {
 				}
 			}
 
-			Graph graph = new SingleGraph("Pruebas");
-			Node[] nodos = new Node [14];
-			String[] names = {"Goff", "Golden", "Tracey", "Emma", "Billy", "Jason", "Ryan", "Carl", "Wizzi", "Old", "Carol", "Cesar", "Ricardo", "Richard"};
+			/*Devolver el arraylist de datos */
+			Relaciones relate = new Relaciones();
+			relate.Pruebas();
+			ArrayList lista = relate.getLista();
 
-			for(int i = 0; i < 14; i++){
-				graph.addNode(names[i]);
-			}
-
-
-			graph.display(true);
+			/*Crear el grafo y agregar los nodos*/
+			relate.seccionA();
 
 			con.close();
 

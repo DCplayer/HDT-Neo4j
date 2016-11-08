@@ -1,3 +1,6 @@
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,10 +26,9 @@ public class Relaciones {
 
             // How to read file in java line by line?
             while ((crunchifyLine = crunchifyBuffer.readLine()) != null) {
-                System.out.println("Raw CSV data: " + crunchifyLine);
-                System.out.println("Converted ArrayList data: " + crunchifyCSVtoArrayList(crunchifyLine) + "\n");
+
                 lista.add(crunchifyCSVtoArrayList(crunchifyLine));
-                System.out.println(lista);
+
 
 
             }
@@ -58,9 +60,17 @@ public class Relaciones {
         return crunchifyResult;
     }
 
+    public void seccionA(){
+        Graph grafo = new SingleGraph("SeccionA");
+        for (int i = 0; i <= 13; i++){
+            grafo.addNode("" + lista.get(0).get(i));
+        }
 
+        
 
+    }
 
-
-
+    public ArrayList<ArrayList> getLista() {
+        return lista;
+    }
 }
