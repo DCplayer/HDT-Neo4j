@@ -33,8 +33,6 @@ public class Relaciones {
 
                 lista.add(crunchifyCSVtoArrayList(crunchifyLine));
 
-
-
             }
 
         } catch (IOException e) {
@@ -71,8 +69,9 @@ public class Relaciones {
         Graph grafo = new SingleGraph("SeccionA");
         for (int i = 0; i <= 13; i++){
             String dato = "" + lista.get(0).get(i);
-            conexion.insert(dato.replace(" ", ""), dato);
-            grafo.addNode(dato).addAttribute("ui.label", "" + lista.get(0).get(i));
+            String nuevoDato = dato.replace(" ", "");
+            conexion.insert(nuevoDato, nuevoDato);
+            grafo.addNode(nuevoDato).addAttribute("ui.label", nuevoDato);
 
         }
 
@@ -81,12 +80,14 @@ public class Relaciones {
                 int numero = Integer.parseInt(""+lista.get(i).get(j));
                 if(numero > 0){
                     String envia = ""+lista.get(0).get(j-1);
+                    String enviador = envia.replace(" ", "");
                     String recibe = ""+lista.get(0).get(i-1);
+                    String recibidor = recibe.replace(" " ,"");
 
-                    edges[contador] = grafo.addEdge(envia.replace(" ", "") + recibe.replace(" ",  ""),envia,recibe);
+                    edges[contador] = grafo.addEdge(enviador + recibidor,enviador,recibidor);
                     edges[contador].addAttribute("length", numero);
                     edges[contador].addAttribute("label",""+edges[contador].getNumber("length"));
-                    conexion.relate(envia, recibe , ""+numero );
+                    conexion.relate(enviador,recibidor , ""+numero );
                     contador =+ 1;
                 }
 
