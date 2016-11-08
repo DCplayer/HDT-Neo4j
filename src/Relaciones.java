@@ -1,6 +1,6 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -8,45 +8,57 @@ import java.util.ArrayList;
  */
 public class Relaciones {
 
-    public int[][] matrix;
-    public int contador = 0, contador2 = 1;
+    public ArrayList<ArrayList> lista = new ArrayList();
 
     /**
-     * CrunchifyCSVtoArrayList: Metodo que convierte documentos csv a arraylists
+     * CrunchifyCSVtoArrayList: Metodo que convierte documentos csv a la matriz de datos
      */
 
+    public void Pruebas(){
+        BufferedReader crunchifyBuffer = null;
+
+        try {
+            String crunchifyLine;
+            crunchifyBuffer = new BufferedReader(new FileReader("C:\\Users\\Christian12\\Desktop\\Cuarto Semestre\\Algoritmos y Estructura de Datos\\HDT-Neo4j\\src\\datos.txt"));
+
+            // How to read file in java line by line?
+            while ((crunchifyLine = crunchifyBuffer.readLine()) != null) {
+                System.out.println("Raw CSV data: " + crunchifyLine);
+                System.out.println("Converted ArrayList data: " + crunchifyCSVtoArrayList(crunchifyLine) + "\n");
+                lista.add(crunchifyCSVtoArrayList(crunchifyLine));
+                System.out.println(lista);
+
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (crunchifyBuffer != null) crunchifyBuffer.close();
+            } catch (IOException crunchifyException) {
+                crunchifyException.printStackTrace();
+            }
+        }
+    }
+
+    // Utility which converts CSV to ArrayList using Split Operation
     public static ArrayList<String> crunchifyCSVtoArrayList(String crunchifyCSV) {
         ArrayList<String> crunchifyResult = new ArrayList<String>();
 
-        try {
-
-            BufferedReader crunchifyBuffer = null;
-            String crunchifyLine;
-            FileReader fr = new FileReader("C:\\Users\\Christian12\\Desktop\\Cuarto Semestre\\Algoritmos y Estructura de Datos\\HDT-Neo4j\\src\\datos.txt");
-            crunchifyBuffer = new BufferedReader(fr);
-
-
-            if (crunchifyCSV != null) {
-                String[] splitData = crunchifyCSV.split("\\s*;\\s*");
-                for (int i = 0; i < splitData.length; i++) {
-                    if (!(splitData[i] == null) || !(splitData[i].length() == 0)) {
-                        crunchifyResult.add(splitData[i].trim());
-                    }
+        if (crunchifyCSV != null) {
+            String[] splitData = crunchifyCSV.split("\\s*;\\s*");
+            for (int i = 0; i < splitData.length; i++) {
+                if (!(splitData[i] == null) || !(splitData[i].length() == 0)) {
+                    crunchifyResult.add(splitData[i].trim());
                 }
             }
+        }
 
-        } catch (FileNotFoundException e) {
-
-        }return crunchifyResult;
+        return crunchifyResult;
     }
 
-    /**
-     * Matrix: crea la matriz de las relaciones entre las personas
-     */
 
-    void Matrix(){
-
-    }
 
 
 
