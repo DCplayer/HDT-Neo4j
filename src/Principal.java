@@ -1,6 +1,16 @@
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.SingleGraph;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+
 /**
  * Created by DiegoC on 05/11/2016.
- *//*
+ */
 public class Principal {
     public static void main (String [] args){
         try {
@@ -31,4 +41,4 @@ public class Principal {
     }
 
 }
-*/
+
