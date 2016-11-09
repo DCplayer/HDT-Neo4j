@@ -8,7 +8,7 @@ public class Connect {
     private Connection con;
     private Statement stmt;
     private final String USER="neo4j";
-    private final String PASSWORD= "Monito96";
+    private final String PASSWORD= "neo4j1";
     static final String  _URL = "jdbc:neo4j:bolt://localhost";
 
     //constructor

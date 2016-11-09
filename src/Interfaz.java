@@ -20,7 +20,7 @@ public class Interfaz {
 	public static void main(String[] args) {
 
 		try {
-			Connection con = DriverManager.getConnection("jdbc:neo4j:bolt://localhost", "neo4j", "Monito96");
+			Connection con = DriverManager.getConnection("jdbc:neo4j:bolt://localhost", "neo4j", "neo4j1");
 			try (Statement stmt = con.createStatement()) {
 				ResultSet rs = stmt.executeQuery("MATCH (n:User) RETURN n.name");
 				while (rs.next()) {
