@@ -34,6 +34,8 @@ public class Interfaz {
 			ArrayList lista = relate.getLista();
 
 			/*Crear el grafo y agregar los nodos*/
+			relate.seccionA();
+
 
 			con.close();
 

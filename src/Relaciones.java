@@ -1,6 +1,7 @@
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
+import scala.math.Ordering;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -97,7 +98,7 @@ public class Relaciones {
 
             }
         }
-        grafo.display();
+        grafo.display(true);
     }
 
 
