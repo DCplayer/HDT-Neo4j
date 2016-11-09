@@ -66,6 +66,21 @@ public class Relaciones {
         return crunchifyResult;
 
     }
+    
+    void pageRank(){
+        pageRank.setVerbose(true);
+        pageRank.init(graph);
+        for (int i=0;i<=13;i++){
+            double rank = pageRank.getRank(nodos[i]);
+            nodos[i].addAttribute("ui.size", 5 + Math.sqrt(graph.getNodeCount() * rank * 20));
+            nodos[i].addAttribute("ui.label", String.format("%.2f%%", rank * 100)+" "+nombres[i]);
+        }
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * seccionA: Metodo que grafica los nodos del texto recibido y sus aristas
@@ -103,6 +118,7 @@ public class Relaciones {
         }
         grafo.display(true);
     }
+
 
     /**
      * seccionf: Metodo para encontrar la distancia mas corta, en correos, entre 2 usuairos
