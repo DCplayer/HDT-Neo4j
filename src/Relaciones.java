@@ -1,7 +1,8 @@
+import org.graphstream.algorithm.Dijkstra;
+import org.graphstream.algorithm.Dijkstra.*;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
-import scala.math.Ordering;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,8 +16,10 @@ public class Relaciones {
 
     public ArrayList<ArrayList> lista = new ArrayList();
     public Edge[] edges = new Edge[64];
+    public Graph grafo = new SingleGraph("SeccionA");
     public int contador = 0;
     public Connect conexion = new Connect();
+    public Graph grafoMinimo;
 
     /**
      * CrunchifyCSVtoArrayList: Metodo que convierte documentos csv a la matriz de datos
@@ -71,7 +74,7 @@ public class Relaciones {
         conexion.delete();
 
 
-        Graph grafo = new SingleGraph("SeccionA");
+
         for (int i = 0; i <= 13; i++){
             String dato = "" + lista.get(0).get(i);
             String nuevoDato = dato.replace(" ", "");
@@ -89,10 +92,10 @@ public class Relaciones {
                     String recibe = ""+lista.get(0).get(i-1);
                     String recibidor = recibe.replace(" " ,"");
 
-                    edges[contador] = grafo.addEdge(enviador + recibidor,enviador,recibidor);
+                    edges[contador] = grafo.addEdge(enviador + recibidor,enviador ,recibidor);
                     edges[contador].addAttribute("length", numero);
                     edges[contador].addAttribute("label",""+edges[contador].getNumber("length"));
-                    conexion.relate(enviador,recibidor, ""+numero );
+                    conexion.relate(recibidor,enviador, ""+numero );
                     contador =+ 1;
                 }
 
@@ -101,7 +104,21 @@ public class Relaciones {
         grafo.display(true);
     }
 
-
+    /**
+     * seccionf: Metodo para encontrar la distancia mas corta, en correos, entre 2 usuairos
+     * @param A Usuario de origen, el que envia los correos
+     * @param B Usuario de llegada, el que recibe los correos
+     * @return el numero de correos minimo que llevo desde A hasta B
+     *
+     * Codigo Derivado de http://graphstream-project.org/doc/Algorithms/Shortest-path/Dijkstra/1.0/
+     */
+    public double seccionf(String A, String B){
+        Dijkstra algoritmo = new Dijkstra(Dijkstra.Element.EDGE, null, "length");
+        algoritmo.init(grafoMinimo);
+        algoritmo.setSource(grafo.getNode(A));
+        algoritmo.compute();
+        return algoritmo.getPathLength(grafo.getNode(B));
+    }
     /**
      * Metodo que devuelve matriz de relaciones del .txt ingresado
      * @return ArrayList con matriz de relaciones
